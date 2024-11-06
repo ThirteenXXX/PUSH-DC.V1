@@ -1,5 +1,4 @@
 import requests
-import random
 import time
 import os
 from colorama import Fore
@@ -23,45 +22,53 @@ time.sleep(1)
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
+# Read messages from file
 with open("pesan.txt", "r") as f:
     words = f.readlines()
 
+# Read token from file
 with open("token.txt", "r") as f:
     authorization = f.readline().strip()
-    
-index = 0
+
+# Initialize message index
+current_message_index = 0
 
 while True:
-        channel_id = channel_id.strip()
+    channel_id = channel_id.strip()
 
-        payload = {
-            'content': words[index]
-        }
+    # Get current message and increment index
+    current_message = words[current_message_index].strip()
+    current_message_index = (current_message_index + 1) % len(words)  # Loop back to start when reaching end
 
-        headers = {
-            'Authorization': authorization
-        }
+    payload = {
+        'content': current_message
+    }
 
-        r = requests.post(f"https://discord.com/api/v9/channels/{channel_id}/messages", data=payload, headers=headers)
-        print(Fore.WHITE + "Sent message: ")
-        print(Fore.YELLOW + payload['content'])
+    headers = {
+        'Authorization': authorization
+    }
 
-        response = requests.get(f'https://discord.com/api/v9/channels/{channel_id}/messages', headers=headers)
-
-        if response.status_code == 200:
-            messages = response.json()
-            if len(messages) == 0:
-                is_running = False
-                break
-            else:
-                time.sleep(waktu1)
-
-                
-        else:
-            print(f'Gagal mendapatkan pesan di channel: {response.status_code}')
-
-    index += 1
-        if index >= len(words):
-            index = 0
+    # Send message
+    r = requests.post(f"https://discord.com/api/v9/channels/{channel_id}/messages", 
+                     data=payload, 
+                     headers=headers)
     
-        time.sleep(waktu1)
+    print(Fore.WHITE + "Sent message: ")
+    print(Fore.YELLOW + payload['content'])
+
+    # Check channel status
+    response = requests.get(f'https://discord.com/api/v9/channels/{channel_id}/messages', 
+                          headers=headers)
+
+    if response.status_code == 200:
+        messages = response.json()
+        if len(messages) == 0:
+            is_running = False
+            break
+        else:
+            time.sleep(waktu1)
+    else:
+        print(f'Gagal mendapatkan pesan di channel: {response.status_code}')
+    
+    time.sleep(waktu1)
+    
