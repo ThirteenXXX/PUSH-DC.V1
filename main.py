@@ -1,4 +1,5 @@
 import requests
+import random
 import time
 import os
 from colorama import Fore
@@ -22,46 +23,45 @@ time.sleep(1)
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
-# Membaca pesan dari file dan menyimpannya dalam list
 with open("pesan.txt", "r") as f:
-    words = [line.strip() for line in f.readlines()]
+    words = f.readlines()
 
 with open("token.txt", "r") as f:
     authorization = f.readline().strip()
-
-# Memulai iterasi pesan secara berurutan
-index = 0  # Menetapkan nilai awal untuk index
+    
+index = 0
 
 while True:
-    # Memastikan ID channel tidak memiliki spasi di awal/akhir
-    channel_id = channel_id.strip()
+        channel_id = channel_id.strip()
 
-    # Mengambil pesan berdasarkan index saat ini
-    payload = {
-        'content': words[index]
-    }
+        payload = {
+            'content': words[index]
+        }
 
-    headers = {
-        'Authorization': authorization
-    }
+        headers = {
+            'Authorization': authorization
+        }
 
-    try:
-        # Mengirim pesan
         r = requests.post(f"https://discord.com/api/v9/channels/{channel_id}/messages", data=payload, headers=headers)
-        if r.status_code == 200:
-            print(Fore.WHITE + "Sent message: ")
-            print(Fore.YELLOW + payload['content'])
+        print(Fore.WHITE + "Sent message: ")
+        print(Fore.YELLOW + payload['content'])
+
+        response = requests.get(f'https://discord.com/api/v9/channels/{channel_id}/messages', headers=headers)
+
+        if response.status_code == 200:
+            messages = response.json()
+            if len(messages) == 0:
+                is_running = False
+                break
+            else:
+                time.sleep(waktu1)
+
+                
         else:
-            print(Fore.RED + f"Failed to send message: {r.status_code}")
-        
-        # Update index untuk pesan selanjutnya
-        index += 1
+            print(f'Gagal mendapatkan pesan di channel: {response.status_code}')
+
+    index += 1
         if index >= len(words):
-            index = 0  # Reset index ke awal jika sudah mencapai akhir list
-
-        # Tunggu sebelum mengirim pesan berikutnya
-        time.sleep(waktu1)
-
-    except Exception as e:
-        print(Fore.RED + f"Error occurred: {e}")
+            index = 0
+    
         time.sleep(waktu1)
