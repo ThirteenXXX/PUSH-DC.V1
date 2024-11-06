@@ -4,8 +4,23 @@ import time
 import os
 from colorama import Fore
 
+print("   ____          ____       _                    ")
+print("  | __ )  __ _  |  _ \ __ _| |_ ___ _ __   __ _  ")
+print("  |  _ \ / _' | | |_) / _' | __/ _ \ '_ \ / _' | ")
+print("  | |_) | (_| | |  __/ (_| | ||  __/ | | | (_| | ")
+print("  |____/ \__, | |_|   \__,_|\__\___|_| |_|\__, | ")
+print("         |___/                            |___/  \n")
+print("=================================================")
+author = "Bg.Pateng"
+print("Author: " + author)
+script = "Push Rank Discord"
+print("Script: " + script)
+telegram = "@bangpateng_group"
+print("Telegram: " + telegram)
+youtube = "Bang Pateng"
+print("Youtube: " + youtube)
 print("===========================================")
-print('Script Auto Chat DC By Thirteen𝕏')
+print('PERINGATAN : TIDAK UNTUK DI PERJUAL-BELIKAN')
 print("===========================================\n")
 
 time.sleep(1)
@@ -52,7 +67,6 @@ while True:
                 is_running = False
                 break
             else:
-                time.sleep(waktu1)
               
         else:
             print(f'Gagal mendapatkan pesan di channel: {response.status_code}')
