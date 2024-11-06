@@ -4,23 +4,8 @@ import time
 import os
 from colorama import Fore
 
-print("   ____          ____       _                    ")
-print("  | __ )  __ _  |  _ \ __ _| |_ ___ _ __   __ _  ")
-print("  |  _ \ / _' | | |_) / _' | __/ _ \ '_ \ / _' | ")
-print("  | |_) | (_| | |  __/ (_| | ||  __/ | | | (_| | ")
-print("  |____/ \__, | |_|   \__,_|\__\___|_| |_|\__, | ")
-print("         |___/                            |___/  \n")
-print("=================================================")
-author = "Bg.Pateng"
-print("Author: " + author)
-script = "Push Rank Discord"
-print("Script: " + script)
-telegram = "@bangpateng_group"
-print("Telegram: " + telegram)
-youtube = "Bang Pateng"
-print("Youtube: " + youtube)
 print("===========================================")
-print('PERINGATAN : TIDAK UNTUK DI PERJUAL-BELIKAN')
+print('BOT AUTO CHAT DISCORD BY Thirteen𝕏')
 print("===========================================\n")
 
 time.sleep(1)
@@ -29,11 +14,11 @@ channel_id = input("Masukkan ID channel: ")
 waktu1 = int(input("Set Waktu Kirim Pesan: "))
 
 time.sleep(1)
-print("3")
+print("Loading...")
 time.sleep(1)
-print("2")
+print("Loading...")
 time.sleep(1)
-print("1")
+print("Loading...")
 time.sleep(1)
 
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -48,7 +33,7 @@ while True:
         channel_id = channel_id.strip()
 
         payload = {
-            'content': random.choice(words).strip()
+            'content': words[index]
         }
 
         headers = {
