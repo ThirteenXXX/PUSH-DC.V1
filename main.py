@@ -33,7 +33,7 @@ while True:
         channel_id = channel_id.strip()
 
         payload = {
-            'content': words[index]
+            'content': index.choice(words).strip()
         }
 
         headers = {
@@ -57,9 +57,5 @@ while True:
                 
         else:
             print(f'Gagal mendapatkan pesan di channel: {response.status_code}')
-
-    index += 1
-    if index >= len(words):
-        index = 0
         
         time.sleep(waktu1)
