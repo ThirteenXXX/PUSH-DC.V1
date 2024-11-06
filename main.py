@@ -1,5 +1,5 @@
 import requests
-import index
+import random
 import time
 import os
 from colorama import Fore
@@ -33,7 +33,7 @@ while True:
         channel_id = channel_id.strip()
 
         payload = {
-            'content': words[index]
+            'content': index(words).strip()
         }
 
         headers = {
