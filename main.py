@@ -1,5 +1,5 @@
 import requests
-import random
+import index
 import time
 import os
 from colorama import Fore
