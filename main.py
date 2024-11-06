@@ -52,7 +52,7 @@ while True:
                 is_running = False
                 break
             else:
-                time.sleep(waktu2)
+                time.sleep(waktu1)
               
         else:
             print(f'Gagal mendapatkan pesan di channel: {response.status_code}')
